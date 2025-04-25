@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Haiper_AI: Dreams in Motion - Reconstructing Imagination Through Generative Cinematics. Explore AI-powered video creation, generative visuals, and cinematic storytelling." name="description"/>
+<meta content="AI video maker, generative visuals, creative motion, cinematic AI, animated storytelling, haiper, haiper ai, hayper" name="keywords"/>
+<title>Haiper_AI - Dreams in Motion: Reconstructing Imagination Through Generative Cinematics</title>
+<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&amp;family=Roboto:wght@300;400;700&amp;family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+        --primary-blue: #B0C4DE;
+        --primary-purple: #E6E6FA;
+        --primary-pink: #FFC0CB;
+        --secondary-teal: #008080;
+        --secondary-gold: #DAA520;
+        --secondary-burgundy: #800020;
+        --accent-white: #FFFFFF;
+        --accent-blue: #00FFFF;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple), var(--primary-pink));
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+    }
+
+    @keyframes gradientBG {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .accent-text {
+        font-family: 'Playfair Display', serif;
+    }
+
+    .btn {
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+
+    .btn::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: rgba(255,255,255,0.1);
+        transform: rotate(45deg);
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover::after {
+        top: -100%;
+        left: -100%;
+    }
+
+    .parallax {
+        perspective: 1px;
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .parallax__layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .parallax__layer--base {
+        transform: translateZ(0);
+    }
+
+    .parallax__layer--back {
+        transform: translateZ(-1px) scale(2);
+    }
+
+    @media (max-width: 768px) {
+        body {
+            font-size: 14px;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        body {
+            font-size: 16px;
+        }
+    }
+
+    @media (min-width: 1025px) {
+        body {
+            font-size: 18px;
+        }
+    }
+</style>
+<script crossorigin="anonymous" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const parallaxLayers = document.querySelectorAll('.parallax__layer');
+            let scrollPosition = window.pageYOffset;
+            parallaxLayers.forEach(layer => {
+                let speed = layer.dataset.speed;
+                layer.style.transform = `translateY(${scrollPosition * speed}px)`;
+            });
+        });
+
+        // Animate elements on scroll
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('.animate-on-scroll').forEach((element) => {
+            gsap.from(element, {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+    });
+</script>
+<div class="position-fixed bottom-0 start-0 end-0 p-3 bg-dark text-light" id="cookie-consent" style="z-index: 1050; display: none;">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-md-8">
+<p class="mb-0">We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+</div>
+<div class="col-md-4 text-md-end mt-2 mt-md-0">
+<button class="btn btn-primary me-2" id="accept-cookies">Accept</button>
+<button class="btn btn-outline-light" id="decline-cookies">Decline</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cookieConsent = document.getElementById('cookie-consent');
+    const acceptBtn = document.getElementById('accept-cookies');
+    const declineBtn = document.getElementById('decline-cookies');
+
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    function hideCookieConsent() {
+        cookieConsent.style.display = 'none !important';
+        cookieConsent.remove(); // Completely remove the element from the DOM
+    }
+
+    if (!localStorage.getItem('cookieConsentShown')) {
+        cookieConsent.style.display = 'block';
+    }
+
+    acceptBtn.addEventListener('click', function() {
+        setCookie('cookieConsent', 'accepted', 365);
+        localStorage.setItem('cookieConsentShown', 'true');
+        hideCookieConsent();
+    });
+
+    declineBtn.addEventListener('click', function() {
+        setCookie('cookieConsent', 'declined', 365);
+        localStorage.setItem('cookieConsentShown', 'true');
+        hideCookieConsent();
+    });
+});
+</script>
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+<div style="flex: 1;">
+<header>
+<header class="navbar navbar-expand-lg navbar-light bg-light py-3">
+<div class="container">
+<a class="navbar-brand" href="/" style="font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: #4a4a8a; letter-spacing: 1px;">
+      Haiper_AI
+    </a>
+<button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+<ul class="navbar-nav">
+<li class="nav-item">
+<a class="nav-link" href="posts.html" style="font-family: 'Roboto', sans-serif; color: #6a6a9a; font-size: 1.1rem; margin: 0 15px; transition: all 0.3s ease;">Posts</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="about.html" style="font-family: 'Roboto', sans-serif; color: #6a6a9a; font-size: 1.1rem; margin: 0 15px; transition: all 0.3s ease;">About</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="contacts.html" style="font-family: 'Roboto', sans-serif; color: #6a6a9a; font-size: 1.1rem; margin: 0 15px; transition: all 0.3s ease;">Contacts</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="privacy_policy.html" style="font-family: 'Roboto', sans-serif; color: #6a6a9a; font-size: 1.1rem; margin: 0 15px; transition: all 0.3s ease;">Privacy Policy</a>
+</li>
+</ul>
+</div>
+</div>
+</header>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto&display=swap');
+
+  .navbar {
+    background: linear-gradient(135deg, #e6e6fa, #f0f8ff) !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .nav-link {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #4a4a8a, #6a6a9a);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .nav-link:hover {
+    color: #4a4a8a !important;
+  }
+
+  @media (max-width: 991px) {
+    .navbar-nav {
+      text-align: center;
+    }
+    .nav-link {
+      margin: 10px 0 !important;
+    }
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('mouseover', () => {
+        link.style.transform = 'translateY(-2px)';
+        link.style.transition = 'transform 0.3s ease';
+      });
+      link.addEventListener('mouseout', () => {
+        link.style.transform = 'translateY(0)';
+      });
+    });
+
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+
+    navbarToggler.addEventListener('click', () => {
+      navbarCollapse.classList.toggle('show');
+    });
+  });
+</script>
+</header>
+<div class="row">
+<div class="col-md-6">
+<div class="container mt-5">
+<h2 class="mb-4 text-primary">Connect with Haiper_AI</h2>
+<div class="contact-info">
+<div class="mb-4">
+<h3 class="h5 text-secondary"><i class="fas fa-map-marker-alt me-2"></i>Visit Us</h3>
+<p>Dreamscape Studios<br/>
+            1234 Imagination Avenue<br/>
+            San Francisco, CA 94105</p>
+</div>
+<div class="mb-4">
+<h3 class="h5 text-secondary"><i class="fas fa-phone-alt me-2"></i>Call Us</h3>
+<p>+1 (415) 555-0123</p>
+</div>
+<div class="mb-4">
+<h3 class="h5 text-secondary"><i class="fas fa-envelope me-2"></i>Email Us</h3>
+<p>create@haiper.ai</p>
+</div>
+<div class="mb-4">
+<h3 class="h5 text-secondary"><i class="fas fa-clock me-2"></i>Business Hours</h3>
+<p>Monday - Friday: 9:00 AM - 6:00 PM PST<br/>
+            Saturday - Sunday: By appointment</p>
+</div>
+</div>
+<div class="social-media mt-5">
+<h3 class="h5 text-secondary mb-3">Follow Our Creative Journey</h3>
+<a class="btn btn-outline-primary me-2 mb-2" href="#"><i class="fab fa-twitter"></i> Twitter</a>
+<a class="btn btn-outline-primary me-2 mb-2" href="#"><i class="fab fa-instagram"></i> Instagram</a>
+<a class="btn btn-outline-primary me-2 mb-2" href="#"><i class="fab fa-youtube"></i> YouTube</a>
+<a class="btn btn-outline-primary mb-2" href="#"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+</div>
+</div>
+<style>
+    .contact-info {
+        background: linear-gradient(135deg, rgba(176, 196, 222, 0.1), rgba(230, 230, 250, 0.1));
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+    }
+
+    .contact-info:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact-info h3 {
+        color: #4B0082;
+        font-weight: 600;
+    }
+
+    .contact-info p {
+        color: #333;
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    .social-media a {
+        transition: all 0.3s ease;
+        border-width: 2px;
+    }
+
+    .social-media a:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .contact-info {
+            padding: 1.5rem;
+        }
+    }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    const contactInfo = document.querySelector('.contact-info');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    observer.observe(contactInfo);
+
+    const socialButtons = document.querySelectorAll('.social-media a');
+    socialButtons.forEach(button => {
+        button.addEventListener('mouseover', () => {
+            button.style.transform = 'translateY(-5px) scale(1.05)';
+        });
+        button.addEventListener('mouseout', () => {
+            button.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+});
+</script>
+</div>
+<div class="col-md-6">
+<div class="container mt-5">
+<h2 class="mb-4" style="color: #4a0e4e; font-family: 'Montserrat', sans-serif;">Contact Us</h2>
+<form class="needs-validation" id="contactForm" novalidate="">
+<div class="mb-3">
+<label class="form-label" for="name" style="color: #2a7f8b;">Name</label>
+<input class="form-control" id="name" required="" style="border-color: #8a4fff; background-color: rgba(255, 255, 255, 0.8);" type="text"/>
+<div class="invalid-feedback">Please enter your name.</div>
+</div>
+<div class="mb-3">
+<label class="form-label" for="email" style="color: #2a7f8b;">Email</label>
+<input class="form-control" id="email" required="" style="border-color: #8a4fff; background-color: rgba(255, 255, 255, 0.8);" type="email"/>
+<div class="invalid-feedback">Please enter a valid email address.</div>
+</div>
+<div class="mb-3">
+<label class="form-label" for="message" style="color: #2a7f8b;">Message</label>
+<textarea class="form-control" id="message" required="" rows="4" style="border-color: #8a4fff; background-color: rgba(255, 255, 255, 0.8);"></textarea>
+<div class="invalid-feedback">Please enter your message.</div>
+</div>
+<button class="btn btn-primary" style="background-color: #4a0e4e; border: none;" type="submit">Send</button>
+</form>
+<div class="alert alert-success mt-3" id="successMessage" style="display: none;">Successfully sent!</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('contactForm');
+  const successMessage = document.getElementById('successMessage');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    if (form.checkValidity()) {
+      // Simulate form submission
+      successMessage.style.display = 'block';
+      form.reset();
+      form.classList.remove('was-validated');
+      
+      // Hide success message after 3 seconds
+      setTimeout(() => {
+        successMessage.style.display = 'none';
+      }, 3000);
+    } else {
+      form.classList.add('was-validated');
+    }
+  }, false);
+});
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+  color: #333;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(138, 79, 255, 0.25);
+}
+
+.btn-primary:hover {
+  background-color: #6a1b9a !important;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px #8a4fff; }
+  50% { box-shadow: 0 0 20px #8a4fff; }
+  100% { box-shadow: 0 0 5px #8a4fff; }
+}
+
+.form-control:focus {
+  animation: glow 1.5s infinite;
+}
+</style>
+</div>
+</div>
+</div>
+<footer style="width: 100%; z-index: 1000;">
+<div class="footer bg-dark text-light py-4">
+<div class="container">
+<div class="row">
+<div class="col-md-4 mb-3 mb-md-0">
+<h5 class="text-uppercase mb-3" style="color: #8a2be2;">Haiper_AI</h5>
+<p class="small">Dreams in Motion: Reconstructing Imagination Through Generative Cinematics</p>
+<div class="mt-3">
+<a class="text-light me-3" href="#"><i class="fab fa-facebook-f"></i></a>
+<a class="text-light me-3" href="#"><i class="fab fa-twitter"></i></a>
+<a class="text-light me-3" href="#"><i class="fab fa-instagram"></i></a>
+<a class="text-light" href="#"><i class="fab fa-linkedin-in"></i></a>
+</div>
+</div>
+<div class="col-md-4 mb-3 mb-md-0">
+<h5 class="text-uppercase mb-3" style="color: #8a2be2;">Quick Links</h5>
+<ul class="list-unstyled">
+<li><a class="text-light text-decoration-none" href="posts.html">Posts</a></li>
+<li><a class="text-light text-decoration-none" href="about.html">About</a></li>
+<li><a class="text-light text-decoration-none" href="contacts.html">Contacts</a></li>
+<li><a class="text-light text-decoration-none" href="privacy_policy.html">Privacy Policy</a></li>
+</ul>
+</div>
+<div class="col-md-4">
+<h5 class="text-uppercase mb-3" style="color: #8a2be2;">Contact Us</h5>
+<p class="small mb-0">123 Dreamscape Avenue</p>
+<p class="small mb-0">Imagination City, IM 54321</p>
+<p class="small mb-0">Phone: (555) 123-4567</p>
+<p class="small">Email: info@haiper-ai.com</p>
+</div>
+</div>
+<hr class="my-4" style="background-color: #8a2be2;"/>
+<div class="row align-items-center">
+<div class="col-md-12 text-center">
+<p class="small mb-0">© 2024 Haiper_AI. All rights reserved.</p>
+</div>
+</div>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Add hover effect to footer links
+    const footerLinks = document.querySelectorAll('.footer a');
+    footerLinks.forEach(link => {
+        link.addEventListener('mouseenter', (e) => {
+            e.target.style.color = '#8a2be2';
+            e.target.style.transition = 'color 0.3s ease';
+        });
+        link.addEventListener('mouseleave', (e) => {
+            e.target.style.color = '#fff';
+        });
+    });
+
+    // Add subtle animation to social icons
+    const socialIcons = document.querySelectorAll('.footer .fab');
+    socialIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', (e) => {
+            e.target.style.transform = 'scale(1.2)';
+            e.target.style.transition = 'transform 0.3s ease';
+        });
+        icon.addEventListener('mouseleave', (e) => {
+            e.target.style.transform = 'scale(1)';
+        });
+    });
+});
+</script>
+</footer>
+</body>
+</html>
